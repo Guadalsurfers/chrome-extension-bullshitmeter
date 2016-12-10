@@ -26,8 +26,10 @@ promisifyAll(chrome, [
 ]);
 
 chrome.runtime.onConnect.addListener((port) => {
-  port.onMessage.addListener((msg) => {
-    port.postMessage('flama');
+  port.onMessage.addListener(() => {
+    fetch('http://api.bullshitmeter.site')
+      .then(res => res.json())
+      .then(json => port.postMessage({ response: json }));
   });
 });
 
