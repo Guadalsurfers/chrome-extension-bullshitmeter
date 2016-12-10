@@ -24,6 +24,13 @@ promisifyAll(chrome, [
   'browserAction',
   'contextMenus'
 ]);
+
+chrome.runtime.onConnect.addListener((port) => {
+  port.onMessage.addListener((msg) => {
+    port.postMessage('flama');
+  });
+});
+
 promisifyAll(chrome.storage, [
   'local',
 ]);

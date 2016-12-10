@@ -9,6 +9,10 @@ chrome.storage.local.get('state', (obj) => {
 
   const createStore = require('../../app/store/configureStore');
 
+  chrome.runtime.onMessage.addListener((req, sender, sendResponse) => {
+    sendResponse('aaa');
+  });
+
   ReactDOM.render(
     <Root store={createStore(initialState)} />,
     document.querySelector('#root')
