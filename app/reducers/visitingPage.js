@@ -1,9 +1,10 @@
 const initialState = {
   currentPage: null,
+  article: null,
   canVote: null,
   numVotes: null,
-  currentBullshitPercentage: null,
-  currentRating: null,
+  currentBullshitPercentage: 0.5, // this means no votes
+  currentRating: null, // this is the rating of the user
 };
 
 export default function visitingPage(state = initialState, action) {
@@ -12,13 +13,19 @@ export default function visitingPage(state = initialState, action) {
       return {
         ...state,
         currentPage: action.payload.url,
-        canVote: action.payload.canVote,
-        numVotes: action.payload.numVotes,
+        currentCanVote: action.payload.canVote,
+        currentNumVotes: action.payload.numVotes,
       };
     case 'SET_BULLSHIT_PERCENTAGE':
-      return { ...state, currentBullshitPercentage: action.payload.bullshitPercentage };
+      return {
+        ...state,
+        currentBullshitPercentage: action.payload.bullshitPercentage,
+      };
     case 'SET_CURRENT_VOTE':
-      return { ...state, currentRating: action.payload.rating };
+      return {
+        ...state,
+        currentRating: action.payload.rating,
+      };
     default:
       return state;
   }

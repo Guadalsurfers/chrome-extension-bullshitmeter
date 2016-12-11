@@ -13,14 +13,23 @@ class App extends Component {
   static propTypes = {
     setCurrentUrl: PropTypes.func.isRequired,
     setBullshitPercentage: PropTypes.func.isRequired,
+    currentBullshitPercentage: PropTypes.number.isRequired,
   };
 
   componentDidMount() {
     chrome.storage.local.get('currentCanonicalUrl', (data) => {
       if (data) {
+        console.log('canonical url in state ', data);
         this.props.setCurrentUrl(data.currentCanonicalUrl);
       }
     });
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.currentBullshitPercentage &&
+    nextProps.currentBullshitPercentage !== this.props.currentBullshitPercentage) {
+      this.props.setBullshitPercentage(nextProps.currentBullshitPercentage);
+    }
   }
 
   render() {
@@ -33,7 +42,13 @@ class App extends Component {
   }
 }
 
-export default connect(undefined, {
+const structuredSelector = (state) => {
+  return {
+    currentBullshitPercentage: state.visitingPage.currentBullshitPercentage,
+  };
+};
+
+export default connect(structuredSelector, {
   setCurrentUrl,
   setBullshitPercentage,
 })(App);

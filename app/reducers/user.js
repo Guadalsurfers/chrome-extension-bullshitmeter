@@ -1,6 +1,9 @@
 const initialState = {
-  userId: null,
-  userToken: null,
+  authentication_token: null,
+  email: null,
+  first_name: null,
+  id: null,
+  last_name: null,
 };
 
 export default function (state = initialState, action) {
