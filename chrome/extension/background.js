@@ -25,13 +25,10 @@ promisifyAll(chrome, [
   'contextMenus'
 ]);
 
-chrome.runtime.onConnect.addListener((port) => {
-  port.onMessage.addListener(() => {
-    fetch('http://api.bullshitmeter.site')
-      .then(res => res.json())
-      .then(json => port.postMessage({ response: json }));
-  });
-});
+// chrome.runtime.onConnect.addListener((port) => {
+//   port.onMessage.addListener(() => {
+//   });
+// });
 
 promisifyAll(chrome.storage, [
   'local',

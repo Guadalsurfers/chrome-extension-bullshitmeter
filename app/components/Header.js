@@ -1,5 +1,10 @@
 import React, { PropTypes, Component } from 'react';
-import TodoTextInput from './TodoTextInput';
+import styled from 'styled-components';
+
+const LogoBshit = styled.h1`
+  marginTop: 0px;
+  letter-spacing: -0.03em;
+`;
 
 export default class Header extends Component {
 
@@ -15,13 +20,8 @@ export default class Header extends Component {
 
   render() {
     return (
-      <header>
-        <h1>todos</h1>
-        <TodoTextInput
-          newTodo
-          onSave={this.handleSave}
-          placeholder="What needs to be done?"
-        />
+      <header style={{ textAlign: 'center' }}>
+        <LogoBshit>BULLSHITmeter</LogoBshit>
       </header>
     );
   }
