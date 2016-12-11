@@ -1,9 +1,26 @@
+import { API_URL } from '../constants/networking';
+
 export function setCurrentUrl(url) {
-  return {
-    type: 'SET_CURRENT_URL',
-    payload: {
-      url,
-    },
+  return (dispatch, getState) => {
+    const currentPage = getState().visitingPage.currentPage;
+
+    if (url !== currentPage) {
+    // We have change paged, now we have to see information from that paged
+
+      fetch(`${API_URL}/articles?url=${encodeURIComponent(url)}`, {
+        method: 'GET',
+      }).then(res => res.json())
+      .then((res) => {
+        dispatch({
+          type: 'SET_CURRENT_URL',
+          payload: {
+            url,
+            canVote: res.can_vote,
+            numVotes: res.num_votes,
+          },
+        });
+      });
+    }
   };
 }
 

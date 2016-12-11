@@ -16,7 +16,6 @@ class App extends Component {
   };
 
   componentDidMount() {
-    this.props.setBullshitPercentage(80);
     chrome.storage.local.get('currentCanonicalUrl', (data) => {
       if (data) {
         this.props.setCurrentUrl(data.currentCanonicalUrl);

@@ -35,13 +35,17 @@ chrome.tabs.onUpdated.addListener(async (tabId, changeInfo, tab) => { // eslint-
         const payload = response.message.payload;
         // above selector maps to results
         // first result of page_type
-        const isArticle = payload.results[1][0].value === 'article';
+        const isArticle = payload.results[1][0] &&
+          payload.results[1][0].value === 'article';
 
         if (isArticle) {
           saveData({
             key: 'currentCanonicalUrl',
-            data: payload.results[0][0].value,
+            data: payload.results[0][0] &&
+             payload.results[0][0].value,
           }, () => { console.log('data saved'); });
+        } else {
+          console.log('not an article');
         }
       }
       return;
