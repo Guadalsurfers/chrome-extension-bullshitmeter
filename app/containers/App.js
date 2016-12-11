@@ -24,9 +24,11 @@ const NotAnArticle = styled.div`
 class App extends Component {
   static propTypes = {
     setCurrentUrl: PropTypes.func.isRequired,
+    currentAuthToken: PropTypes.string.isRequired,
     setBullshitPercentage: PropTypes.func.isRequired,
     currentBullshitPercentage: PropTypes.number.isRequired,
     currentPage: PropTypes.string.isRequired,
+    getGoogleToken: PropTypes.func.isRequired,
   };
 
   componentDidMount() {
@@ -38,6 +40,10 @@ class App extends Component {
     //   id: null,
     //   last_name: null,
     // });
+
+    if(!this.props.currentAuthToken) {
+      this.props.getGoogleToken();
+    }
 
     chrome.storage.local.get('currentCanonicalUrl', (data) => {
       if (data) {
@@ -76,6 +82,7 @@ class App extends Component {
 
 const structuredSelector = (state) => {
   return {
+    currentAuthToken: state.user.authentication_token,
     currentBullshitPercentage: state.visitingPage.currentBullshitPercentage,
     currentPage: state.visitingPage.currentPage,
   };
@@ -84,7 +91,7 @@ const structuredSelector = (state) => {
 export default connect(structuredSelector, {
   setCurrentUrl,
   setBullshitPercentage,
-  getGoogleToken, // not used here, demo purposed
-  setUser, // same here
+  getGoogleToken,
+  setUser,  // not used here, demo purposed
 })(App);
 
