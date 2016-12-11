@@ -11,7 +11,8 @@ import {
  } from '../actions/visitingPage';
 
 import {
-  getGoogleToken
+  getGoogleToken,
+  setUser,
 } from '../actions/user';
 
 const NotAnArticle = styled.div`
@@ -29,6 +30,15 @@ class App extends Component {
   };
 
   componentDidMount() {
+    // THIS IS TO LOGOUT THE USER
+    // this.props.setUser({
+    //   authentication_token: null,
+    //   email: null,
+    //   first_name: null,
+    //   id: null,
+    //   last_name: null,
+    // });
+
     chrome.storage.local.get('currentCanonicalUrl', (data) => {
       if (data) {
         console.log('canonical url in state ', data);
@@ -75,5 +85,6 @@ export default connect(structuredSelector, {
   setCurrentUrl,
   setBullshitPercentage,
   getGoogleToken, // not used here, demo purposed
+  setUser, // same here
 })(App);
 

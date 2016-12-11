@@ -1,6 +1,15 @@
 import serialize from 'serialize-javascript';
 import { API_URL } from '../constants/networking';
 
+export function setUser(user) {
+  return {
+    type: 'SET_USER',
+    payload: {
+      user,
+    },
+  };
+}
+
 export function getGoogleToken() {
   return (dispatch) => {
     chrome.identity.getAuthToken({ interactive: true }, (token) => {
@@ -64,7 +73,6 @@ export function vote(rating) {
     const actualNumVotes = visitingPageState.numVotes || 0;
     const newBullshitPercentage = ((visitingPageState.currentBullshitPercentage * actualNumVotes) + rating) / (actualNumVotes + 1);
 
-    debugger;
     dispatch({
       type: 'SET_BULLSHIT_PERCENTAGE',
       payload: {
