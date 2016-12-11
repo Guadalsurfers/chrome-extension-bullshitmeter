@@ -15,6 +15,7 @@ export default function () {
     const store = next(reducer, initialState);
     store.subscribe(() => {
       const state = store.getState();
+
       const bullshitPercentage = state.visitingPage.currentBullshitPercentage;
       saveState(state);
 

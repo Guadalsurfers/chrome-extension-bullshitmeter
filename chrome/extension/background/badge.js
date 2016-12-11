@@ -1,13 +1,15 @@
-chrome.storage.local.get('todos', (obj) => {
-  let todos = obj.todos;
-  if (todos) {
-    todos = JSON.parse(todos);
-    const len = todos.filter(todo => !todo.marked).length;
-    if (len > 0) {
-      chrome.browserAction.setBadgeText({ text: len.toString() });
+chrome.storage.local.get('visitingPage', (obj) => {
+  let visitingPage = obj.visitingPage;
+  if (visitingPage) {
+    visitingPage = JSON.parse(visitingPage);
+
+    if (visitingPage.currentBullshitPercentage) {
+      chrome.browserAction.setBadgeText({
+        text: visitingPage.currentBullshitPercentage.toString()
+      });
     }
   } else {
     // Initial
-    chrome.browserAction.setBadgeText({ text: 'Bullshit' });
+    chrome.browserAction.setBadgeText({ text: '' });
   }
 });
