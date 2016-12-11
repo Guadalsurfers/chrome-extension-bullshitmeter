@@ -7,7 +7,7 @@ export function setCurrentUrl(url) {
     if (url !== currentPage) {
     // We have change paged, now we have to see information from that paged
 
-      fetch(`${API_URL}/articles?url=${encodeURIComponent(url)}`, {
+      fetch(`${API_URL}/articles?url=${encodeURIComponent(url)}&user[id]=&user[authentication_token]=`, {
         method: 'GET',
       }).then(res => res.json())
       .then((res) => {
