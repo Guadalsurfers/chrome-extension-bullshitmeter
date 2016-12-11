@@ -1,13 +1,20 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import Panel from 'muicss/lib/react/panel';
 import BullshitMeter from './BullshitMeter';
 
-export default () => (
+const ArticleInfo = ({ bullshitPercentage }) => (
   <Panel>
     <BullshitMeter
-      bullshit={100}
+      bullshit={bullshitPercentage}
     />
   </Panel>
 );
 
+const structuredSelector = (state) => {
+  return {
+    bullshitPercentage: state.visitingPage.currentBullshitPercentage,
+  };
+};
 
+export default connect(structuredSelector)(ArticleInfo);
