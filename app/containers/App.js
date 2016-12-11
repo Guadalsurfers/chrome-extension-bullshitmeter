@@ -1,5 +1,7 @@
 import React, { Component, PropTypes } from 'react';
+import Container from 'muicss';
 import { connect } from 'react-redux';
+import styled from 'styled-components';
 import Header from '../components/Header';
 import MainSection from '../components/MainSection';
 import style from './App.css';
@@ -12,12 +14,18 @@ import {
   getGoogleToken
 } from '../actions/user';
 
+const NotAnArticle = styled.div`
+  text-align: center;
+  font-size: 30px;
+  padding-botton: 2em;
+`;
+
 class App extends Component {
   static propTypes = {
     setCurrentUrl: PropTypes.func.isRequired,
     setBullshitPercentage: PropTypes.func.isRequired,
     currentBullshitPercentage: PropTypes.number.isRequired,
-    currentPage: PropTypes.number.isRequired,
+    currentPage: PropTypes.string.isRequired,
   };
 
   componentDidMount() {
@@ -39,11 +47,12 @@ class App extends Component {
   render() {
     // MARRONERADA PARA DEMO, VIEW PAGEPARSER
     if (this.props.currentPage === 'NOT_AN_ARTICLE') {
+
       return (<div className={style.normal}>
         <Header />
-        <div>
+        <NotAnArticle>
           Not an article
-        </div>
+        </NotAnArticle>
       </div>);
     }
     return (
