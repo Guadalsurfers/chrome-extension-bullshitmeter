@@ -2,7 +2,6 @@ import { API_URL } from '../constants/networking';
 
 export function setCurrentUrl(url) {
   return (dispatch, getState) => {
-    const currentPage = getState().visitingPage.currentPage;
     const currentUser = getState().user;
 
     fetch(`${API_URL}/articles?url=${encodeURIComponent(url)}&user[id]=${currentUser.id}&user[authentication_token]=${currentUser.authentication_token}`, {
@@ -30,7 +29,7 @@ export function setCurrentUrl(url) {
       dispatch({
         type: 'SET_CURRENT_VOTE',
         payload: {
-          bullshitPercentage: res.article ? res.article.bs_index : 0.5,
+          rating: res.vote ? res.vote.rating : null,
         },
       });
     });
