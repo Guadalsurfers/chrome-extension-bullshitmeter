@@ -23,5 +23,5 @@
    "scopes": ["https://www.googleapis.com/auth/plus.login"]
   }
   "permissions": [ "contextMenus", "identity", "tabs", "storage", "https://*/*", "http://*/*/"],
-  "content_security_policy": "default-src 'self'; script-src 'self'; style-src * 'unsafe-inline'; img-src 'self' data:;"
+  "content_security_policy": "default-src 'self'; script-src 'self'; style-src * 'unsafe-inline'; connect-src https://bullshitmeter.herokuapp.com/; img-src 'self' data:;"
 }

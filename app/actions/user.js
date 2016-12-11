@@ -1,5 +1,8 @@
+import serialize from 'serialize-javascript';
+import { API_URL } from '../constants/networking';
+
 export function getGoogleToken() {
-  return (dispatch) => {
+  return (dispatch, getState) => {
     chrome.identity.getAuthToken({ interactive: true }, (token) => {
       if (chrome.runtime.lastError) {
         //
@@ -10,12 +13,27 @@ export function getGoogleToken() {
         // POST: google_token
 
         // returns serializer user
-        dispatch({
-          type: 'SET_TOKEN',
-          payload: {
-            token,
-          },
+        const myHeaders = new Headers({
+          'Content-Type': 'application/json',
         });
+
+        fetch(`${API_URL}/users`, {
+          method: 'POST',
+          headers: myHeaders,
+          body: serialize({
+            google_token: token,
+          }),
+        }).then(res => res.json())
+        .then((json) => {
+          console.log('RECEIVED RESPONSE FROM SERVER');
+        });
+
+        // dispatch({
+        //   type: 'SET_TOKEN',
+        //   payload: {
+        //     token,
+        //   },
+        // });
       }
     });
   };
