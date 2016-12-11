@@ -28,9 +28,9 @@ VotingButton.propTypes = {
 
 const enhance = compose(
   withHandlers({
-    onClickCreator: props => decision =>
+    onClickCreator: props => decision => () =>
       props.onClick({
-        decision
+        decision,
       })
   })
 );

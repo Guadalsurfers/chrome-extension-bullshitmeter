@@ -5,7 +5,7 @@ import BullshitMeter from './BullshitMeter';
 export default () => (
   <Panel>
     <BullshitMeter
-      bullshit={20}
+      bullshit={100}
     />
   </Panel>
 );

@@ -8,7 +8,7 @@ const MeterContainer = styled.div`
 
 const fancyRed = '#FF4136';
 const fancyGreen = '#2ECC40';
-const colorInterpolator = interpolateHclLong(fancyRed, fancyGreen);
+const colorInterpolator = interpolateHclLong(fancyGreen, fancyRed);
 
 const Circle = styled.div`
   width: 158px;
@@ -53,7 +53,7 @@ const BullshitMeter = ({ bullshit }) => (
     style={{ currentBullshit: spring(bullshit, springConfig) }}
   >
     {value => (<MeterContainer>
-      <TextOnTop>{value.currentBullshit.toFixed(2)}%</TextOnTop>
+      <TextOnTop>{value.currentBullshit.toFixed(2)}% BULLSHIT</TextOnTop>
       <Circle
         bgColor={colorInterpolator(value.currentBullshit / 100)}
       >
