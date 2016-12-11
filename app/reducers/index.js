@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux';
-import foo from './foo';
+import visitingPage from './visitingPage';
 
 export default combineReducers({
-  foo,
+  visitingPage,
 });

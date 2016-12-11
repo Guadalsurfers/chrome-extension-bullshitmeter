@@ -25,11 +25,6 @@ promisifyAll(chrome, [
   'contextMenus'
 ]);
 
-// chrome.runtime.onConnect.addListener((port) => {
-//   port.onMessage.addListener(() => {
-//   });
-// });
-
 promisifyAll(chrome.storage, [
   'local',
 ]);

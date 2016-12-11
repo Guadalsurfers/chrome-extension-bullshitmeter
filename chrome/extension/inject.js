@@ -1,3 +1,5 @@
+// For the sake of gods keep this code light
+
 window.addEventListener('load', () => {
   chrome.extension.onMessage.addListener((msg, sender, sendResponse) => {
     if (msg.message.type !== 'PLEASE_GRAB_DOM') return;
