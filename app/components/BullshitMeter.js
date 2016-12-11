@@ -50,14 +50,25 @@ const bullshitToDegrees = bullshit =>
   ((180 / 100) * bullshit) - 90;
 
 class BullshitMeter extends Component {
+  static propTypes = {
+    numVotes: PropTypes.number.isRequired,
+  };
+
   render() {
     return (<Motion
       defaultStyle={{ currentBullshit: 0 }}
       style={{ currentBullshit: spring(this.props.bullshit, springConfig) }}
     >
       {value => (<MeterContainer>
-        <TextOnTop>{value.currentBullshit.toFixed(2) * 100}% BULLSHIT</TextOnTop>
-        <BasedOn>Based on {this.props.numVotes ? this.props.numVotes.toString() : 0} votes</BasedOn>
+        <TextOnTop>
+          {this.props.numVotes !== 0 ?
+            `${value.currentBullshit.toFixed(2) * 100}% BULLSHIT` :
+            'No votes yet'}
+        </TextOnTop>
+        {this.props.numVotes !== 0 ?
+          <BasedOn>Based on {this.props.numVotes ? this.props.numVotes.toString() : 0} votes</BasedOn> :
+          null
+      }
         <Circle
           bgColor={colorInterpolator(value.currentBullshit)}
         >
