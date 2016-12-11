@@ -65,7 +65,7 @@ class VotingButtons extends Component {
     </Button>);
   };
 
-  votingButtons = () => (!this.props.currentRating ? (
+  votingButtons = () => (this.props.currentRating == null ? (
     <div>
       <Container fluid>
         <Dropdown color="primary" label="Rate this article" alignMenu="left">

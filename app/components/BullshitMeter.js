@@ -44,6 +44,8 @@ const springConfig = {
   damping: 20,
 };
 
+const BasedOn = styled.div`text-align: center`;
+
 const bullshitToDegrees = bullshit =>
   ((180 / 100) * bullshit) - 90;
 
@@ -55,6 +57,7 @@ class BullshitMeter extends Component {
     >
       {value => (<MeterContainer>
         <TextOnTop>{value.currentBullshit.toFixed(2) * 100}% BULLSHIT</TextOnTop>
+        <BasedOn>Based on {this.props.numVotes} votes</BasedOn>
         <Circle
           bgColor={colorInterpolator(value.currentBullshit)}
         >

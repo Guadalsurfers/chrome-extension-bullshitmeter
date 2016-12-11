@@ -20,6 +20,7 @@ export default function visitingPage(state = initialState, action) {
       return {
         ...state,
         currentBullshitPercentage: action.payload.bullshitPercentage,
+        numVotes: action.payload.numVotes,
       };
     case 'SET_CURRENT_VOTE':
       return {

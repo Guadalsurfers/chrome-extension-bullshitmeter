@@ -12,7 +12,6 @@ export function setCurrentUrl(url) {
         type: 'SET_CURRENT_URL',
         payload: {
           url,
-          canVote: res.can_vote,
           numVotes: res.num_votes,
           article: res.article,
         },
@@ -23,6 +22,7 @@ export function setCurrentUrl(url) {
         type: 'SET_BULLSHIT_PERCENTAGE',
         payload: {
           bullshitPercentage: res.article ? res.article.bs_index : 0.5,
+          numVotes: res.num_votes || 0,
         },
       });
 
