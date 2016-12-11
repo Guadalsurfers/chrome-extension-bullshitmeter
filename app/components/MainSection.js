@@ -1,7 +1,8 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
+import { connect } from 'react-redux';
 import Container from 'muicss/lib/react/container';
 import styled from 'styled-components';
-
+import { vote } from '../actions/user';
 import ArticleInfo from './ArticleInfo';
 import VotingButtons from './VotingButtons';
 
@@ -11,13 +12,17 @@ const VotingButtonsContainer = styled.div`
   padding-bottom: 1em;
 `;
 
-export default class MainSection extends Component {
+class MainSection extends Component {
+  static propTypes = {
+    vote: PropTypes.func.isRequired,
+  }
+
   render() {
     return (
       <Container fluid>
         <VotingButtonsContainer>
           <VotingButtons
-            onClick={() => console.log('assa')}
+            onClick={rating => this.props.vote(rating)}
           />
         </VotingButtonsContainer>
         <ArticleInfo />
@@ -25,3 +30,7 @@ export default class MainSection extends Component {
     );
   }
 }
+
+export default connect(undefined, {
+  vote,
+})(MainSection);

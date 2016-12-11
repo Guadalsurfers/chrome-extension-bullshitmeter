@@ -33,17 +33,14 @@ VotingButton.propTypes = {
 const enhance = compose(
   withHandlers({
     onClickCreator: props => decision => () =>
-      props.onClick({
-        decision,
-      })
+      props.onClick(decision)
   })
 );
 
 class VotingButtons extends Component {
-
   static propTypes = {
     userId: PropTypes.string,
-    userToken: PropTypes.string,
+    authToken: PropTypes.string,
     getGoogleToken: PropTypes.func.isRequired,
   }
 
@@ -55,21 +52,21 @@ class VotingButtons extends Component {
             <VotingButton
               color="danger"
               text="Bullshit"
-              onClick={this.props.onClickCreator('negative')}
+              onClick={this.props.onClickCreator(0)}
             />
           </DropdownItem>
           <DropdownItem>
             <VotingButton
               color="primary"
               text="Neutral"
-              onClick={this.props.onClickCreator('neutral')}
+              onClick={this.props.onClickCreator(0.5)}
             />
           </DropdownItem>
           <DropdownItem>
             <VotingButton
               color="accent"
               text="Legit"
-              onClick={this.props.onClickCreator('positive')}
+              onClick={this.props.onClickCreator(1)}
             />
           </DropdownItem>
         </Dropdown>
@@ -90,8 +87,8 @@ class VotingButtons extends Component {
   );
 
   render() {
-    const { userId, userToken } = this.props;
-    return (userId && userToken) ?
+    const { userId, authToken } = this.props;
+    return (userId && authToken) ?
       this.votingButtons() :
       this.loginButton();
   }
@@ -101,9 +98,9 @@ VotingButtons.propTypes = {
   onClickCreator: PropTypes.func.isRequired,
 };
 
-const structuredSelector = (state) => ({
-  userId: state.user.userId,
-  userToken: state.user.userToken,
+const structuredSelector = state => ({
+  userId: state.user.id,
+  authToken: state.user.authentication_token,
 });
 
 export default connect(structuredSelector, {

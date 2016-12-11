@@ -20,8 +20,8 @@
   },
   "oauth2": {
    "client_id": "276988820197-ofigr0n79mvg022if4nfvph1jlu6gnq1.apps.googleusercontent.com",
-   "scopes": ["https://www.googleapis.com/auth/plus.login"]
-  }
+   "scopes": ["openid", "email", "profile"]
+  },
   "permissions": [ "contextMenus", "identity", "management", "tabs", "storage", "https://*/*", "http://*/*/"],
   "content_security_policy": "default-src 'self'; script-src 'self' http://localhost:3000 https://localhost:3000 'unsafe-eval'; connect-src http://localhost:3000 https://localhost:3000 https://bullshitmeter.herokuapp.com/; style-src * 'unsafe-inline' 'self' blob:; img-src 'self' data:;"
 }

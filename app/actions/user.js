@@ -2,7 +2,7 @@ import serialize from 'serialize-javascript';
 import { API_URL } from '../constants/networking';
 
 export function getGoogleToken() {
-  return (dispatch, getState) => {
+  return (dispatch) => {
     chrome.identity.getAuthToken({ interactive: true }, (token) => {
       if (chrome.runtime.lastError) {
         //
@@ -25,16 +25,46 @@ export function getGoogleToken() {
           }),
         }).then(res => res.json())
         .then((json) => {
-          console.log('RECEIVED RESPONSE FROM SERVER');
+          dispatch({
+            type: 'SET_USER',
+            payload: {
+              user: json.user,
+            },
+          });
         });
-
-        // dispatch({
-        //   type: 'SET_TOKEN',
-        //   payload: {
-        //     token,
-        //   },
-        // });
       }
     });
+  };
+}
+
+
+export function vote(rating) {
+  return (dispatch, getState) => {
+    if (!getState().user.authentication_token) {
+      // This should not happen
+      return;
+    }
+
+    const userState = getState().user;
+    const visitingPageState = getState().visitingPage;
+
+    const myHeaders = new Headers({
+      'Content-Type': 'application/json',
+    });
+
+    fetch(`${API_URL}/votes`, {
+      method: 'POST',
+      headers: myHeaders,
+      body: serialize({
+        user: {
+          id: userState.id,
+          authentication_token: userState.authentication_token,
+        },
+        vote: {
+          article_url: visitingPageState.currentPage,
+          rating,
+        },
+      }),
+    }).then(res => res.json());
   };
 }
