@@ -27,11 +27,6 @@ export default function visitingPage(state = initialState, action) {
         ...state,
         currentRating: action.payload.rating,
       };
-    case 'INCREASE_VOTE':
-      return {
-        ...state,
-        numVotes: state.numVotes + 1,
-      };
     default:
       return state;
   }

@@ -73,10 +73,6 @@ export function vote(rating) {
       },
     })
 
-    dispatch({
-      type: 'INCREASE_VOTE',
-    });
-
     fetch(`${API_URL}/votes`, {
       method: 'POST',
       headers: myHeaders,
