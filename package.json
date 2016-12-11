@@ -79,6 +79,7 @@
     "react-redux": "^4.4.6",
     "recompose": "^0.20.2",
     "redux": "^3.2.1",
+    "redux-logger": "^2.7.4",
     "redux-thunk": "^2.0.1",
     "styled-components": "^1.1.3"
   }

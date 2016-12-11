@@ -19,10 +19,11 @@ const message = {
 };
 
 function saveData({ key, data }, cb) {
-  console.log('assaasaasas');
-  chrome.storage.sync.set({
+  const objectToSet = {
     [key]: data,
-  }, cb);
+  };
+  console.log('want to save.. ', objectToSet);
+  chrome.storage.local.set(objectToSet, cb);
 }
 
 chrome.tabs.onUpdated.addListener(async (tabId, changeInfo, tab) => { // eslint-disable-line
@@ -39,7 +40,7 @@ chrome.tabs.onUpdated.addListener(async (tabId, changeInfo, tab) => { // eslint-
         if (isArticle) {
           saveData({
             key: 'currentCanonicalUrl',
-            data: payload.results[0].value,
+            data: payload.results[0][0].value,
           }, () => { console.log('data saved'); });
         }
       }

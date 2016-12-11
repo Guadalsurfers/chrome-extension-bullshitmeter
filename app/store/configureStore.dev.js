@@ -1,5 +1,6 @@
 import { applyMiddleware, createStore, compose } from 'redux';
 import thunk from 'redux-thunk';
+import createLogger from 'redux-logger';
 import rootReducer from '../reducers';
 import storage from '../utils/storage';
 
@@ -12,8 +13,10 @@ const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ ?
   compose;
 /* eslint-enable no-underscore-dangle */
 
+const logger = createLogger();
+
 const enhancer = composeEnhancers(
-  applyMiddleware(thunk),
+  applyMiddleware(thunk, logger),
   storage(),
 );
 

@@ -1,5 +1,4 @@
-import React, { Component } from 'react';
-
+import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import Header from '../components/Header';
 import MainSection from '../components/MainSection';
@@ -8,8 +7,17 @@ import { setCurrentUrl } from '../actions/visitingPage';
 
 
 class App extends Component {
+
+  static propTypes = {
+    setCurrentUrl: PropTypes.func.isRequired,
+  };
+
   componentDidMount() {
-    debugger;
+    chrome.storage.local.get('currentCanonicalUrl', (data) => {
+      if (data) {
+        this.props.setCurrentUrl(data.currentCanonicalUrl);
+      }
+    });
   }
 
   render() {
