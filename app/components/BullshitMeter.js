@@ -34,10 +34,9 @@ const NeedlePath = styled.path`
 `;
 
 const TextOnTop = styled.div`
-  position: absolute;
-  left: 20%;
-  z-index: 300;
-  font-size: 30px;
+  position: relative;
+  text-align: center;
+  font-size: 2em;
 `;
 
 const springConfig = {

@@ -1,9 +1,16 @@
 import React, { Component, PropTypes } from 'react';
+import Container from 'muicss/lib/react/container';
+import styled from 'styled-components';
 
 import { SHOW_ALL } from '../constants/TodoFilters';
 import ArticleInfo from './ArticleInfo';
 import VotingButtons from './VotingButtons';
-import Container from 'muicss/lib/react/container';
+
+const VotingButtonsContainer = styled.div`
+  text-align: center;
+  margin: 0.05em;
+  padding-bottom: 1em;
+`;
 
 export default class MainSection extends Component {
 
@@ -31,15 +38,12 @@ export default class MainSection extends Component {
   render() {
     return (
       <Container fluid>
-        <ArticleInfo />
-
-        <div
-          style={{ textAlign: 'center' }}
-        >
+        <VotingButtonsContainer>
           <VotingButtons
             onClick={() => console.log('assa')}
           />
-        </div>
+        </VotingButtonsContainer>
+        <ArticleInfo />
       </Container>
     );
   }
