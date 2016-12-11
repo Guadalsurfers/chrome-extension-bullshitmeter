@@ -42,9 +42,30 @@ class VotingButtons extends Component {
     userId: PropTypes.string,
     authToken: PropTypes.string,
     getGoogleToken: PropTypes.func.isRequired,
+    currentRating: PropTypes.number.isRequired,
   }
 
-  votingButtons = () => (
+  ratingToButton = () => {
+    const colorMap = {
+      0: 'accent',
+      0.5: 'primary',
+      1: 'danger',
+    };
+    const labelMap = {
+      0: 'Legit',
+      0.5: 'Neutral',
+      1: 'Bullshit',
+    };
+
+    return (<Button
+      disabled
+      color={colorMap[this.props.currentRating] || 'primary'}
+    >
+      {labelMap[this.props.currentRating] || 'No vote'}
+    </Button>);
+  };
+
+  votingButtons = () => (!this.props.currentRating ? (
     <div>
       <Container fluid>
         <Dropdown color="primary" label="Rate this article" alignMenu="left">
@@ -71,7 +92,10 @@ class VotingButtons extends Component {
           </DropdownItem>
         </Dropdown>
       </Container>
-    </div>);
+    </div>) : (<div>
+      {this.ratingToButton()}
+    </div>
+  ));
 
   loginButton = () => (
     <div>
@@ -101,6 +125,7 @@ VotingButtons.propTypes = {
 const structuredSelector = state => ({
   userId: state.user.id,
   authToken: state.user.authentication_token,
+  currentRating: state.visitingPage.currentRating,
 });
 
 export default connect(structuredSelector, {

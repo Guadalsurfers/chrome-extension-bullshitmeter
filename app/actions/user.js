@@ -52,6 +52,15 @@ export function vote(rating) {
       'Content-Type': 'application/json',
     });
 
+    // Optimistic update for the lulz of hackathon
+
+    dispatch({
+      type: 'SET_CURRENT_VOTE',
+      payload: {
+        rating,
+      },
+    });
+
     fetch(`${API_URL}/votes`, {
       method: 'POST',
       headers: myHeaders,
@@ -65,6 +74,9 @@ export function vote(rating) {
           rating,
         },
       }),
-    }).then(res => res.json());
+    }).then(res => res.json())
+    .then((json) => {
+      // something nifty with success true;
+    });
   };
 }
