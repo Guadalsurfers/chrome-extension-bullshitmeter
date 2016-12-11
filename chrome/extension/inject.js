@@ -11,7 +11,10 @@ window.addEventListener('load', () => {
           results: selectors.map((sel) => {
             const nodeList = document.querySelectorAll(sel.selector);
             const nodesArray = Array.prototype.slice.call(nodeList);
-            return nodesArray.map(node => node[sel.property]);
+            return nodesArray.map(node => ({
+              meaning: sel.meaning,
+              value: node[sel.property],
+            }));
           })
         },
       },

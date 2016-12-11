@@ -4,6 +4,7 @@ const message = {
     payload: {
       selectors: [
         {
+          meaning: 'canonical_url',
           selector: "[rel='canonical']",
           property: 'href',
         },
