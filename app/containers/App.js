@@ -32,16 +32,17 @@ class App extends Component {
   };
 
   componentDidMount() {
-    // THIS IS TO LOGOUT THE USER
+    //THIS IS TO LOGOUT THE USER
     // this.props.setUser({
     //   authentication_token: null,
     //   email: null,
     //   first_name: null,
     //   id: null,
     //   last_name: null,
+    //   token: null,
     // });
 
-    if(!this.props.currentAuthToken) {
+    if (!this.props.currentAuthToken) {
       this.props.getGoogleToken();
     }
 
