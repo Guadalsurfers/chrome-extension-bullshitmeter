@@ -45,7 +45,11 @@ chrome.tabs.onUpdated.addListener(async (tabId, changeInfo, tab) => { // eslint-
              payload.results[0][0].value,
           }, () => { console.log('data saved'); });
         } else {
-          console.log('not an article');
+          // MARRONERADA PARA DEMO
+          saveData({
+            key: 'currentCanonicalUrl',
+            data: 'NOT_AN_ARTICLE',
+          });
         }
       }
       return;

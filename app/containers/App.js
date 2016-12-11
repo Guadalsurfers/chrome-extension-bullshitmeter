@@ -17,6 +17,7 @@ class App extends Component {
     setCurrentUrl: PropTypes.func.isRequired,
     setBullshitPercentage: PropTypes.func.isRequired,
     currentBullshitPercentage: PropTypes.number.isRequired,
+    currentPage: PropTypes.number.isRequired,
   };
 
   componentDidMount() {
@@ -36,6 +37,15 @@ class App extends Component {
   }
 
   render() {
+    // MARRONERADA PARA DEMO, VIEW PAGEPARSER
+    if (this.props.currentPage === 'NOT_AN_ARTICLE') {
+      return (<div className={style.normal}>
+        <Header />
+        <div>
+          Not an article
+        </div>
+      </div>);
+    }
     return (
       <div className={style.normal}>
         <Header />
@@ -48,6 +58,7 @@ class App extends Component {
 const structuredSelector = (state) => {
   return {
     currentBullshitPercentage: state.visitingPage.currentBullshitPercentage,
+    currentPage: state.visitingPage.currentPage,
   };
 };
 
