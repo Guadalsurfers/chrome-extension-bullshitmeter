@@ -4,9 +4,9 @@ chrome.storage.local.get('visitingPage', (obj) => {
     visitingPage = JSON.parse(visitingPage);
 
     if (visitingPage.currentBullshitPercentage) {
-      chrome.browserAction.setBadgeText({
-        text: visitingPage.currentBullshitPercentage.toString()
-      });
+      // chrome.browserAction.setBadgeText({
+      //   text: visitingPage.currentBullshitPercentage.toString()
+      // });
     }
   } else {
     // Initial

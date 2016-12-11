@@ -4,9 +4,9 @@ function saveState(state) {
 
 function setBadge(text) {
   if (chrome.browserAction) {
-    chrome.browserAction.setBadgeText({
-      text: text.toString()
-    });
+    // chrome.browserAction.setBadgeText({
+    //   text: text.toString()
+    // });
   }
 }
 
