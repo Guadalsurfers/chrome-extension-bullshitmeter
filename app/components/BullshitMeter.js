@@ -1,16 +1,21 @@
 import React, { PropTypes } from 'react';
 import styled from 'styled-components';
 import { Motion, spring } from 'react-motion';
+import { interpolateHclLong } from 'd3-interpolate';
 
 const MeterContainer = styled.div`
 `;
+
+const fancyRed = '#FF4136';
+const fancyGreen = '#2ECC40';
+const colorInterpolator = interpolateHclLong(fancyRed, fancyGreen);
 
 const Circle = styled.div`
   width: 158px;
   height: 158px;
   margin: 20px auto;
   text-align: center;
-  background: #51bbb5;
+  background: ${props => props.bgColor};
   overflow: hidden;
   border-radius: 50%;
   border: 5px solid #fff;
@@ -18,7 +23,6 @@ const Circle = styled.div`
 
 const MySvg = styled.svg`
   margin:20px 0 0 0;
-  background: #51bbb5;
 `;
 
 const NeedlePath = styled.path`
@@ -37,7 +41,8 @@ const TextOnTop = styled.div`
 `;
 
 const springConfig = {
-  stiffness: 10,
+  stiffness: 50,
+  damping: 20,
 };
 
 const bullshitToDegrees = bullshit =>
@@ -50,7 +55,9 @@ const BullshitMeter = ({ bullshit }) => (
   >
     {value => (<MeterContainer>
       <TextOnTop>{value.currentBullshit.toFixed(2)}%</TextOnTop>
-      <Circle>
+      <Circle
+        bgColor={colorInterpolator(value.currentBullshit / 100)}
+      >
         <MySvg width="125px" height="90px">
           <path d="m 15.5 66 a 4.5 4.5 0 0 0 9 0" fill="#ffffff" />
           <path d="m 100.5 66 a 4.5 4.5 0 0 0 9 0" fill="#ffffff" />
@@ -60,8 +67,6 @@ const BullshitMeter = ({ bullshit }) => (
             id="needle"
             d="m 50 60 a 13.5 17 0 1 0 27 0 l -13.5 -73 z"
             fill="#ffffff"
-            stroke="#51bbb5"
-            strokeWidth="9"
           />
         </MySvg>
       </Circle>
