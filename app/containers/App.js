@@ -42,9 +42,9 @@ class App extends Component {
     //   token: null,
     // });
 
-    if (!this.props.currentAuthToken) {
-      this.props.getGoogleToken();
-    }
+    // if (!this.props.currentAuthToken) {
+    //   this.props.getGoogleToken();
+    // }
 
     chrome.storage.local.get('currentCanonicalUrl', (data) => {
       if (data) {
