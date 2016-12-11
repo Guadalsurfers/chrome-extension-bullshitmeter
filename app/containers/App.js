@@ -10,14 +10,13 @@ import {
 
 
 class App extends Component {
-
   static propTypes = {
     setCurrentUrl: PropTypes.func.isRequired,
     setBullshitPercentage: PropTypes.func.isRequired,
   };
 
   componentDidMount() {
-    this.props.setBullshitPercentage(20);
+    this.props.setBullshitPercentage(80);
     chrome.storage.local.get('currentCanonicalUrl', (data) => {
       if (data) {
         this.props.setCurrentUrl(data.currentCanonicalUrl);

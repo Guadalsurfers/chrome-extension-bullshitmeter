@@ -15,3 +15,16 @@ export function setBullshitPercentage(percentage) {
     },
   };
 }
+
+export function getCurrentArticleData() {
+  return (dispatch) => {
+    const reply = {
+      article: {
+      url: 'http://loquesea/',
+      bs_index: 80,
+      },
+      num_votes: num_votes,
+      // can_vote: !!user&.can_vote_article?(article)
+    };
+  };
+}

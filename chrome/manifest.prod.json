@@ -18,6 +18,10 @@
   "background": {
     "page": "background.html"
   },
-  "permissions": [ "contextMenus", "tabs", "storage", "https://*/*", "http://*/*/"],
+  "oauth2": {
+   "client_id": "276988820197-ofigr0n79mvg022if4nfvph1jlu6gnq1.apps.googleusercontent.com",
+   "scopes": ["https://www.googleapis.com/auth/plus.login"]
+  }
+  "permissions": [ "contextMenus", "identity", "tabs", "storage", "https://*/*", "http://*/*/"],
   "content_security_policy": "default-src 'self'; script-src 'self'; style-src * 'unsafe-inline'; img-src 'self' data:;"
 }

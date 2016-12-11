@@ -1,15 +1,19 @@
-import React, { PropTypes } from 'react';
+import React, { PropTypes, Component } from 'react';
+import { connect } from 'react-redux';
 import Button from 'muicss/lib/react/button';
 import Container from 'muicss/lib/react/container';
 
 import Dropdown from 'muicss/lib/react/dropdown';
 import DropdownItem from 'muicss/lib/react/dropdown-item';
 
+import { getGoogleToken } from '../actions/user';
 
 import {
   compose,
   withHandlers,
 } from 'recompose';
+
+
 
 const VotingButton = ({ color, text, onClick }) => (<div>
   <Button
@@ -35,36 +39,73 @@ const enhance = compose(
   })
 );
 
-const VotingButtons = ({ onClickCreator }) => (<div>
-  <Container fluid>
-    <Dropdown color="primary" label="Vote for this article" alignMenu="left">
-      <DropdownItem>
-        <VotingButton
-          color="danger"
-          text="Bullshit"
-          onClick={onClickCreator('negative')}
-        />
-      </DropdownItem>
-      <DropdownItem>
-        <VotingButton
+class VotingButtons extends Component {
+
+  static propTypes = {
+    userId: PropTypes.string,
+    userToken: PropTypes.string,
+    getGoogleToken: PropTypes.func.isRequired,
+  }
+
+  votingButtons = () => (
+    <div>
+      <Container fluid>
+        <Dropdown color="primary" label="Rate this article" alignMenu="left">
+          <DropdownItem>
+            <VotingButton
+              color="danger"
+              text="Bullshit"
+              onClick={this.props.onClickCreator('negative')}
+            />
+          </DropdownItem>
+          <DropdownItem>
+            <VotingButton
+              color="primary"
+              text="Neutral"
+              onClick={this.props.onClickCreator('neutral')}
+            />
+          </DropdownItem>
+          <DropdownItem>
+            <VotingButton
+              color="accent"
+              text="Legit"
+              onClick={this.props.onClickCreator('positive')}
+            />
+          </DropdownItem>
+        </Dropdown>
+      </Container>
+    </div>);
+
+  loginButton = () => (
+    <div>
+      <Container fluid>
+        <Button
           color="primary"
-          text="Neutral"
-          onClick={onClickCreator('neutral')}
-        />
-      </DropdownItem>
-      <DropdownItem>
-        <VotingButton
-          color="accent"
-          text="Legit"
-          onClick={onClickCreator('positive')}
-        />
-      </DropdownItem>
-    </Dropdown>
-  </Container>
-</div>);
+          onClick={() => this.props.getGoogleToken()}
+        >
+          Login to change the world
+        </Button>
+      </Container>
+    </div>
+  );
+
+  render() {
+    const { userId, userToken } = this.props;
+    return (userId && userToken) ?
+      this.votingButtons() :
+      this.loginButton();
+  }
+}
 
 VotingButtons.propTypes = {
   onClickCreator: PropTypes.func.isRequired,
 };
 
-export default enhance(VotingButtons);
+const structuredSelector = (state) => ({
+  userId: state.user.userId,
+  userToken: state.user.userToken,
+});
+
+export default connect(structuredSelector, {
+  getGoogleToken,
+})(enhance(VotingButtons));
