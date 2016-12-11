@@ -52,7 +52,7 @@ class VotingButtons extends Component {
             <VotingButton
               color="danger"
               text="Bullshit"
-              onClick={this.props.onClickCreator(0)}
+              onClick={this.props.onClickCreator(1)}
             />
           </DropdownItem>
           <DropdownItem>
@@ -66,7 +66,7 @@ class VotingButtons extends Component {
             <VotingButton
               color="accent"
               text="Legit"
-              onClick={this.props.onClickCreator(1)}
+              onClick={this.props.onClickCreator(0)}
             />
           </DropdownItem>
         </Dropdown>
