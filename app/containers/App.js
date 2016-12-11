@@ -8,6 +8,9 @@ import {
   setBullshitPercentage,
  } from '../actions/visitingPage';
 
+import {
+  getGoogleToken
+} from '../actions/user';
 
 class App extends Component {
   static propTypes = {
@@ -51,5 +54,6 @@ const structuredSelector = (state) => {
 export default connect(structuredSelector, {
   setCurrentUrl,
   setBullshitPercentage,
+  getGoogleToken, // not used here, demo purposed
 })(App);
 
