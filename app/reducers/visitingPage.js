@@ -2,7 +2,7 @@ const initialState = {
   currentPage: null,
   article: null,
   canVote: null,
-  numVotes: null,
+  numVotes: 0,
   currentBullshitPercentage: 0.5, // this means no votes
   currentRating: null, // this is the rating of the user
 };
@@ -26,6 +26,11 @@ export default function visitingPage(state = initialState, action) {
       return {
         ...state,
         currentRating: action.payload.rating,
+      };
+    case 'INCREASE_VOTE':
+      return {
+        ...state,
+        numVotes: state.numVotes + 1,
       };
     default:
       return state;

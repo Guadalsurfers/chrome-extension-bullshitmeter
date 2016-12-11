@@ -61,6 +61,22 @@ export function vote(rating) {
       },
     });
 
+    const actualNumVotes = visitingPageState.numVotes || 0;
+    const newBullshitPercentage = ((visitingPageState.currentBullshitPercentage * actualNumVotes) + rating) / (actualNumVotes + 1);
+
+    debugger;
+    dispatch({
+      type: 'SET_BULLSHIT_PERCENTAGE',
+      payload: {
+        bullshitPercentage: newBullshitPercentage,
+        numVotes: actualNumVotes + 1,
+      },
+    })
+
+    dispatch({
+      type: 'INCREASE_VOTE',
+    });
+
     fetch(`${API_URL}/votes`, {
       method: 'POST',
       headers: myHeaders,

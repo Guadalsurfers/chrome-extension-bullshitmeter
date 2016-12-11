@@ -57,7 +57,7 @@ class BullshitMeter extends Component {
     >
       {value => (<MeterContainer>
         <TextOnTop>{value.currentBullshit.toFixed(2) * 100}% BULLSHIT</TextOnTop>
-        <BasedOn>Based on {this.props.numVotes} votes</BasedOn>
+        <BasedOn>Based on {this.props.numVotes ? this.props.numVotes.toString() : 0} votes</BasedOn>
         <Circle
           bgColor={colorInterpolator(value.currentBullshit)}
         >
