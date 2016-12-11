@@ -37,3 +37,4 @@ promisifyAll(chrome.storage, [
 require('./background/contextMenus');
 require('./background/inject');
 require('./background/badge');
+require('./background/pageParser');

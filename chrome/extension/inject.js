@@ -1,13 +1,20 @@
 window.addEventListener('load', () => {
-  // const port = chrome.runtime.connect({ name: 'parsing_channel' });
+  chrome.extension.onMessage.addListener((msg, sender, sendResponse) => {
+    if (msg.message.type !== 'PLEASE_GRAB_DOM') return;
 
-  // port.postMessage({
-  //   action: {
-  //     type: 'ADD_TODO',
-  //     text: 'Kissso',
-  //   },
-  // });
-  // port.onMessage.addListener((msg) => {
-  //   console.log('received message in content ', msg);
-  // });
+    const selectors = msg.message.payload.selectors;
+
+    sendResponse({
+      message: {
+        type: 'HERE_DOM',
+        payload: {
+          results: selectors.map((sel) => {
+            const nodeList = document.querySelectorAll(sel.selector);
+            const nodesArray = Array.prototype.slice.call(nodeList);
+            return nodesArray.map(node => node[sel.property]);
+          })
+        },
+      },
+    });
+  });
 });
